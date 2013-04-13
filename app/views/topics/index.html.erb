@@ -1,0 +1,26 @@
+<h1>スレッド一覧</h1>
+<br>
+<div style="border:1px solid black;padding:5px">
+<% @topics.each do |topic| %>
+<%= link_to topic.title, comments_path(topic.id) %>
+<% end %>
+</div>
+<br>
+新規スレッド作成<br>
+<%= form_for @new_topic, :url => {:action => 'create' } do |n| %>
+  <%= fields_for @new_comment do |c| %>
+    <div class="field">
+      名前<br><%= c.text_field :name %>
+    </div>
+    <div class="field">
+      タイトル<br><%= n.text_field :title %>
+    </div>
+    <div class="field">
+      本文<br><%= c.text_area :text %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= n.submit '作成' %>
+  </div>
+<% end %>
+

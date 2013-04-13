@@ -1,0 +1,28 @@
+<h1><%= @topic.title %></h1>
+<%= link_to 'スレッド一覧', topics_path %>
+<br>
+<% i = 1 %>
+<% @comments.each do |comment| %>
+<hr>
+<%= i %>: 名前:<B><%= comment.name%>&nbsp;&nbsp;&nbsp;
+<%=comment.updated_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S")%><br></B>
+<pre style="padding:3px 15px">
+<%= comment.text%><br>
+</pre>
+<% i += 1 %>
+<% end %>
+<hr>
+<br>
+新規投稿<br>
+<%= form_for @new_comment, :url => create_comment_path do |c| %>
+  <div class="field">
+    名前<br><%= c.text_field :name %>
+  </div>
+  <div class="field">
+    本文<br><%= c.text_area :text %>
+  </div>
+  <div class="actions">
+    <%= c.submit '投稿' %>
+  </div>
+<% end %>
+<%= link_to 'スレッド一覧', topics_path %>
