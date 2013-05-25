@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
-  #CSRF‘Î‰žƒR[ƒh‚ð¶¬
+  #CSRFå¯¾å¿œã‚³ãƒ¼ãƒ‰ã‚’ç”Ÿæˆ
   protect_from_forgery
 end

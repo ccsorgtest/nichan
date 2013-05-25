@@ -73,18 +73,18 @@ Nichan::Application.routes.draw do
   
   
   
-  #‰º‹LA’Ç‰Á‚µ‚½ƒ‹[ƒeƒBƒ“ƒO‚Ìİ’èB‚±‚±‚æ‚èã‚Ìs‚ÍƒfƒtƒHƒ‹ƒg‚Åì¬‚³‚ê‚éƒTƒ“ƒvƒ‹B‘S‚Ä
-  #ƒRƒƒ“ƒgƒAƒEƒg‚³‚ê‚½ó‘Ô‚ªƒfƒtƒHƒ‹ƒg
+  #ä¸‹è¨˜ã€è¿½åŠ ã—ãŸãƒ«ãƒ¼ãƒ†ã‚£ãƒ³ã‚°ã®è¨­å®šã€‚ã“ã“ã‚ˆã‚Šä¸Šã®è¡Œã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ä½œæˆã•ã‚Œã‚‹ã‚µãƒ³ãƒ—ãƒ«ã€‚å…¨ã¦
+  #ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã•ã‚ŒãŸçŠ¶æ…‹ãŒãƒ‡ãƒ•ã‚©ãƒ«ãƒˆ
   
-  #URL‚ÉA"/2chan"‚ªw’è‚³‚ê‚½‚çA"topics"ƒRƒ“ƒgƒ[ƒ‰‚Ì"index"ƒƒ\ƒbƒh‚ğÀs‚·‚é
-  #‚ÅA‚»‚ÌURL‚ğƒrƒ…[‚©‚çURLƒwƒ‹ƒp[‚ÅQÆ‚Å‚«‚é‚æ‚¤‚É‚·‚é
-  # ¨‰º‹L:as => :topics‚ÅAƒrƒ…[‚©‚çtopics_url‚Ætopics_pash‚ªQÆ‚Å‚«‚é
+  #URLã«ã€"/2chan"ãŒæŒ‡å®šã•ã‚ŒãŸã‚‰ã€"topics"ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ã®"index"ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹
+  #ã§ã€ãã®URLã‚’ãƒ“ãƒ¥ãƒ¼ã‹ã‚‰URLãƒ˜ãƒ«ãƒ‘ãƒ¼ã§å‚ç…§ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹
+  # â†’ä¸‹è¨˜:as => :topicsã§ã€ãƒ“ãƒ¥ãƒ¼ã‹ã‚‰topics_urlã¨topics_pashãŒå‚ç…§ã§ãã‚‹
   match "/2chan" => "topics#index", :as => :topics
-  #:viaw’è‚É‚æ‚èApostAget‚È‚ÇAHTTPƒƒ\ƒbƒh‚ğŒÀ’è‚·‚é‚±‚Æ‚ª‚Å‚«‚é
-  #‰º‹L‚Ípostƒƒ\ƒbƒh‚ÉŒÀ’è‚µ‚½ê‡
+  #:viaæŒ‡å®šã«ã‚ˆã‚Šã€postã€getãªã©ã€HTTPãƒ¡ã‚½ãƒƒãƒ‰ã‚’é™å®šã™ã‚‹ã“ã¨ãŒã§ãã‚‹
+  #ä¸‹è¨˜ã¯postãƒ¡ã‚½ãƒƒãƒ‰ã«é™å®šã—ãŸå ´åˆ
   match "/2chan/create" => "topics#create", :as => :create_topic, :via => :post
   match "/2chan/:topic_id" => "comment#index", :as => :comments  
-  #‰º‹L‚Í:visw’è‚É‚æ‚èApostAgetƒƒ\ƒbƒh‚ÉŒÀ’è‚µ‚½ê‡(”z—ñ‚Å‚Ìw’è‚Æ‚È‚éj
+  #ä¸‹è¨˜ã¯:visæŒ‡å®šã«ã‚ˆã‚Šã€postã€getãƒ¡ã‚½ãƒƒãƒ‰ã«é™å®šã—ãŸå ´åˆ(é…åˆ—ã§ã®æŒ‡å®šã¨ãªã‚‹ï¼‰
   match "/2chan/:topic_id/create" => "comment#create", :as => :create_comment, :via => [:get, :post]
 
 end

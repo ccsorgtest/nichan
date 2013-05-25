@@ -1,46 +1,46 @@
 # coding: utf-8
 
-#�X���b�h�ꗗ��ʂɊւ���R���g���[��
+#スレッド一覧画面に関するコントローラ
 class TopicsController < ApplicationController
-  #�ꗗ�\��
+  #一覧表示
   def index
-    #�X���b�h�ꗗ��DB����擾
+    #スレッド一覧をDBから取得
     @topics = Topic.all
-    #�V�K�X���b�h�p�󂯎M�pTopic�I�u�W�F�N�g������Ă���
+    #新規スレッド用受け皿用Topicオブジェクトを作っておく
     @new_topic = Topic.new
-    #�V�K�X���b�h�쐬����1���ڂ̓��e�̎󂯎M�pComment�I�u�W�F�N�g������Ă���
+    #新規スレッド作成時の1件目の投稿の受け皿用Commentオブジェクトを作っておく
     @new_comment = Comment.new
   end
 
-  #�V�K�X���b�h�쐬
+  #新規スレッド作成
   def create
-    #�r���[��form_for�w���p�[�ɂ��A":topic"�A":comment"�Ƃ����V���{����
-    #���f���ɑΉ��������͒l�̃I�u�W�F�N�g���Q�Ƃł���B
-    #���ۂɂ́A���L�̃n�b�V���`���Ńf�[�^�������Ă���
+    #ビューのform_forヘルパーにより、":topic"、":comment"というシンボルで
+    #モデルに対応した入力値のオブジェクトが参照できる。
+    #実際には、下記のハッシュ形式でデータが入ってくる
     #  :topic => {
-    #    :title => "�r���[�œ��͂����^�C�g��"
+    #    :title => "ビューで入力したタイトル"
     #  }
     #  :comment => {
-    #    :name => "�r���[�œ��͂������O", 
-    #    :text => "�r���[�œ��͂������e���e",
-    #    :topic_id => ��
+    #    :name => "ビューで入力した名前", 
+    #    :text => "ビューで入力した投稿内容",
+    #    :topic_id => 空
     #  }
-    #:topic���ATopic.new�ɓn�����ƂŁA���͒l�𔽉f����
-    #Topic�I�u�W�F�N�g���쐬����i���L�j
+    #:topicを、Topic.newに渡すことで、入力値を反映した
+    #Topicオブジェクトを作成する（下記）
     @topic = Topic.new(params[:topic])
-    #save���\�b�h��DB�ɏ�������
+    #saveメソッドでDBに書き込む
     @topic.save
-    #:comment���ACommnet.new�ɓn�����ƂŁA���͒l�𔽉f����
-    #Comment�I�u�W�F�N�g���쐬����i���L�j
+    #:commentを、Commnet.newに渡すことで、入力値を反映した
+    #Commentオブジェクトを作成する（下記）
     @comment = Comment.new(params[:comment])
-    #���e��topic_id���X���b�h��id(@topic.id)�Őݒ肷��
-    #@topic.id�́ATopic.new���ɂ͋�(nil?)�����A.save���Ɍ��肵�Ă���i�Ǝv���j
+    #投稿のtopic_idをスレッドのid(@topic.id)で設定する
+    #@topic.idは、Topic.new時には空(nil?)だが、.save時に決定している（と思う）
     @comment.topic_id = @topic.id
-    #save���\�b�h��DB�ɏ�������
+    #saveメソッドでDBに書き込む
     @comment.save
-    #�ꗗ�\���p�̔z��(@comments)�ɁA��save����@comment����������
+    #一覧表示用の配列(@comments)に、今saveした@commentだけを入れる
     @comments = [@comment]
-    #���e�ꗗ�\���p�r���[�Ƀ��_�C���N�g����
+    #投稿一覧表示用ビューにリダイレクトする
     redirect_to :controller => 'comment', :action => 'index', :topic_id => @topic.id
   end
 end
