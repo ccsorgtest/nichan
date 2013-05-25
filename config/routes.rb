@@ -58,9 +58,33 @@ Nichan::Application.routes.draw do
 
 
   #resources :topics
-    match "/2chan" => "topics#index", :as => :topics  
-    match "/2chan/create" => "topics#create", :as => :create_topic, :via => :post
-    match "/2chan/:topic_id" => "comment#index", :as => :comments  
-    match "/2chan/:topic_id/create" => "comment#create", :as => :create_comment, :via => [:get, :post]
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #下記、追加したルーティングの設定。ここより上の行はデフォルトで作成されるサンプル。全て
+  #コメントアウトされた状態がデフォルト
+  
+  #URLに、"/2chan"が指定されたら、"topics"コントローラの"index"メソッドを実行する
+  #で、そのURLをビューからURLヘルパーで参照できるようにする
+  # →下記:as => :topicsで、ビューからtopics_urlとtopics_pashが参照できる
+  match "/2chan" => "topics#index", :as => :topics
+  #:via指定により、post、getなど、HTTPメソッドを限定することができる
+  #下記はpostメソッドに限定した場合
+  match "/2chan/create" => "topics#create", :as => :create_topic, :via => :post
+  match "/2chan/:topic_id" => "comment#index", :as => :comments  
+  #下記は:vis指定により、post、getメソッドに限定した場合(配列での指定となる）
+  match "/2chan/:topic_id/create" => "comment#create", :as => :create_comment, :via => [:get, :post]
 
 end
