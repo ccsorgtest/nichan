@@ -8,6 +8,7 @@ class CommentController < ApplicationController
     @new_comment.topic_id = params[:topic_id]
   end
 
+  #投稿
   def create
     @comment = Comment.new(params[:comment])
     @comment.name = '名無しさん' if @comment.name.empty?
